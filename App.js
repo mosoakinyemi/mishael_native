@@ -5,10 +5,12 @@ const {CalendarModule} = NativeModules;
 
 const App = () => {
   const onPress = () => {
-    CalendarModule.createCalendarEvent('demoName', 'demoLocation');
+    CalendarModule.createCalendarEvent('demoName', 'demoLocation', eventId => {
+      console.log(`Created a new test event with id: ${eventId}`);
+    });
   };
   return (
-    <View style={styles.backgroundStyle}>
+    <View style={styles.container}>
       <Button
         title="Click to invoke native module!"
         color="#841584"
