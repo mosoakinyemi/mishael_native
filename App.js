@@ -1,20 +1,84 @@
 import React from 'react';
-import {StyleSheet, View, Button, NativeModules} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Button,
+  NativeModules,
+  Alert,
+  Text,
+} from 'react-native';
+import ListItem from './ios/src/ListItem';
 
 const {CalendarModule} = NativeModules;
 
 const App = () => {
-  const onPress = () => {
-    CalendarModule.createCalendarEvent('demoName', 'demoLocation', eventId => {
-      console.log(`Created a new test event with id: ${eventId}`);
-    });
+  const [calendarEvents, setCalendarEvents] = React.useState([]);
+
+  const onPress = async () => {
+    try {
+      const eventId = await CalendarModule.createCalendarEvent(
+        'Real Party',
+        'Zoom call',
+      );
+      Alert.alert(`Event added successfully`);
+      await fetchCalendarEvents();
+    } catch (e) {
+      console.error(e);
+    }
   };
+
+  const fetchCalendarEvents = async () => {
+    try {
+      const savedEvents = await CalendarModule.fetchCalendarEvents();
+      setCalendarEvents(savedEvents);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const deleteEvent = async eventId => {
+    try {
+      await CalendarModule.removeEventItem(eventId);
+      Alert.alert(`Deleted events successfully!`);
+      await fetchCalendarEvents();
+    } catch (e) {
+      console.log({e});
+    }
+  };
+  const updateEvent = async eventId => {
+    try {
+      console.log('Selected ID', eventId);
+      await CalendarModule.updateEvent(eventId, {
+        location: 'Updated Location 🙂',
+      });
+
+      await fetchCalendarEvents();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <View style={styles.container}>
+      <Text>Calendar Events</Text>
+      {calendarEvents.map(event => {
+        return (
+          <ListItem
+            eventId={event?.id}
+            title={event?.title}
+            location={event?.location}
+            onPressDelete={deleteEvent}
+            onPressUpdate={updateEvent}
+            time={event?.startDate}
+          />
+        );
+      })}
+      <Button title="Add Event!" color="#841584" onPress={onPress} />
+
       <Button
-        title="Click to invoke native module!"
-        color="#841584"
-        onPress={onPress}
+        title="Fetch Calendar Events"
+        color="hotpink"
+        onPress={fetchCalendarEvents}
       />
     </View>
   );
@@ -23,8 +87,8 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 80,
   },
 });
 
