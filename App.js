@@ -4,15 +4,31 @@ import {
   View,
   Button,
   NativeModules,
+  NativeEventEmitter,
   Alert,
   Text,
 } from 'react-native';
 import ListItem from './ios/src/ListItem';
 
 const {CalendarModule} = NativeModules;
+const calendarEventEmitter = new NativeEventEmitter(CalendarModule);
 
 const App = () => {
   const [calendarEvents, setCalendarEvents] = React.useState([]);
+
+  React.useEffect(() => {
+    const subscription = calendarEventEmitter.addListener(
+      'onCreateCalendarEvent',
+      onCalendarEvent,
+    );
+    return () => {
+      subscription.remove();
+    };
+  }, [onCalendarEvent]);
+
+  const onCalendarEvent = event => {
+    alert(event.message);
+  };
 
   const onPress = async () => {
     try {
@@ -64,6 +80,7 @@ const App = () => {
       {calendarEvents.map(event => {
         return (
           <ListItem
+            key={event?.id}
             eventId={event?.id}
             title={event?.title}
             location={event?.location}

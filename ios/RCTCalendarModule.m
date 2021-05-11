@@ -15,6 +15,34 @@
 
 
 @implementation RCTCalendarModule
+{
+  bool hasListeners;
+}
+
+- (NSArray<NSString *> *)supportedEvents {
+    return @[@"onCreateCalendarEvent"];
+}
+
+-(void)startObserving {
+    hasListeners = YES;
+}
+
+-(void)stopObserving {
+    hasListeners = NO;
+}
+
+- (void) fireReminder:(NSString *) title
+{
+  NSString *message = [NSString stringWithFormat:@"%@ is comming up in 1hr", title];
+  double delayInSeconds = 10.0;
+  dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+  dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+    if (self->hasListeners) { // Only send events if listening
+      [self sendEventWithName:@"onCreateCalendarEvent" body:@{@"message":message }];
+    }
+  });
+
+}
 
 - (EKEventStore *)eventStore {
   if (!_eventStore) {
@@ -68,6 +96,7 @@ RCT_EXPORT_METHOD(createCalendarEvent:(NSString *)name
     self.savedEventId = event.eventIdentifier;  //save the event id if you want to access this later
     if (success) {
       resolve(@[self.savedEventId]);
+      [self fireReminder:name];
       return;
     }
     reject(@"Saving Failed", @"Could not save event", nil);
