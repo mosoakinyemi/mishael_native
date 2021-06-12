@@ -7,11 +7,6 @@ import com.facebook.react.bridge.ReactMethod;
 import java.util.Map;
 import java.util.HashMap;
 
-public class CalendarModule extends ReactContextBaseJavaModule {
-  CalendarModule(ReactApplicationContext context) {
-    super(context);
-  }
-}
 import com.facebook.react.ReactActivity;
 
 public class MainActivity extends ReactActivity {

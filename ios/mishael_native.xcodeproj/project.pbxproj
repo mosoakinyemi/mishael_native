@@ -14,6 +14,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		98A53689449E5EE0C422A75F /* libPods-mishael_native-mishael_nativeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC494D7EFF21471F16401C3A /* libPods-mishael_native-mishael_nativeTests.a */; };
 		CBB9F4B728FD7F1ABA7C5283 /* libPods-mishael_native.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B08C11A2D4AD5DFACA5C7CE /* libPods-mishael_native.a */; };
+		FA4AC502262ECFEF0073F53A /* RCTCalendarModule.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4AC501262ECFEF0073F53A /* RCTCalendarModule.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		E810AAB724C6173D4C14D13E /* Pods-mishael_native-mishael_nativeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mishael_native-mishael_nativeTests.release.xcconfig"; path = "Target Support Files/Pods-mishael_native-mishael_nativeTests/Pods-mishael_native-mishael_nativeTests.release.xcconfig"; sourceTree = "<group>"; };
 		EA58A5D7DAB611C5A72BF68A /* Pods-mishael_native-mishael_nativeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mishael_native-mishael_nativeTests.debug.xcconfig"; path = "Target Support Files/Pods-mishael_native-mishael_nativeTests/Pods-mishael_native-mishael_nativeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		FA4AC500262EBEFF0073F53A /* RCTCalendarModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTCalendarModule.h; sourceTree = "<group>"; };
+		FA4AC501262ECFEF0073F53A /* RCTCalendarModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTCalendarModule.m; sourceTree = "<group>"; };
 		FC494D7EFF21471F16401C3A /* libPods-mishael_native-mishael_nativeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mishael_native-mishael_nativeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -92,6 +95,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				FA4AC500262EBEFF0073F53A /* RCTCalendarModule.h */,
+				FA4AC501262ECFEF0073F53A /* RCTCalendarModule.m */,
 			);
 			name = mishael_native;
 			sourceTree = "<group>";
@@ -114,7 +119,6 @@
 				EA58A5D7DAB611C5A72BF68A /* Pods-mishael_native-mishael_nativeTests.debug.xcconfig */,
 				E810AAB724C6173D4C14D13E /* Pods-mishael_native-mishael_nativeTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -411,6 +415,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA4AC502262ECFEF0073F53A /* RCTCalendarModule.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
